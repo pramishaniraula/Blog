@@ -6,33 +6,26 @@
         exit;
     }
 
-    $catId = $_GET['id'];
-    $selectQuery = "SELECT * FROM categories WHERE id='$catId'";
+    $postId = $_GET['id'];
+    $selectQuery = "SELECT * FROM posts WHERE id='$postId'";
     $result = mysqli_query($conn, $selectQuery);
     
-    $category = mysqli_fetch_assoc($result);
+    $post = mysqli_fetch_assoc($result);
     
 
     if(isset($_POST['save'])){
-        $name  = $_POST['name'];
+        $title  = $_POST['title'];
         $slug  = $_POST['slug'];
 
         if(empty($name) || empty($slug)){
             $message = "Please enter name and slug";
             $messageType = 'error';
         }else{
-            $updateFields = "name='$name', slug='$slug'";
+            $updateFields = "title='$title', slug='$slug'";
             if(isset($_FILES['image']) && $_FILES['image']['error'] != 4){
-                // Delete old image if exists
-                if (!empty($category['image'])) {
-                    $oldImagePath = "uploads/category/" . $category['image'];
-                    if (file_exists($oldImagePath)) {
-                        unlink($oldImagePath);
-                    }
-                }
                 // New image uploaded
-                $imageName = time() . "_" . basename($_FILES['image']['name']);
-                $target_dir = "uploads/category/";
+                $imageName = time() . "_" . basename($_FILES['image']['title']);
+                $target_dir = "uploads/post/";
                 $target_file = $target_dir . $imageName;
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
                     $updateFields .= ", image='$imageName'";
@@ -43,13 +36,13 @@
                     goto end;
                 }
             }
-            $sql = "UPDATE categories SET $updateFields WHERE id='$catId'";
+            $sql = "UPDATE posts SET $updateFields WHERE id='$postId'";
             if ($conn->query($sql) === TRUE) {
-                $message = "Category Updated Successfully.";
+                $message = "Post Updated Successfully.";
                 $messageType = 'success';
-                // Refresh the category data
+                // Refresh the post data
                 $result = mysqli_query($conn, $selectQuery);
-                $category = mysqli_fetch_assoc($result);
+                $post = mysqli_fetch_assoc($result);
             }else {
                 echo "Error: ". $conn->error;
             }
@@ -63,7 +56,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Category</title>
+    <title>Edit Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -85,18 +78,18 @@
                         <div class="mb-3">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" name="name" 
-                            placeholder="Category Name" value="<?=$category['name']?>">
+                            placeholder="post Name" value="<?=$post['name']?>">
                         </div>
                         <div class="mb-3">
                             <label for="slug">Slug</label>
-                            <input type="text" class="form-control" name="slug" placeholder="Category Slug" value="<?=$category['slug']?>">
+                            <input type="text" class="form-control" name="slug" placeholder="post Slug" value="<?=$post['slug']?>">
                         </div>
                         <div class="mb-3">
                             <label for="image">Image</label>
-                            <?php if(!empty($category['image'])): ?>
-                                <br><img src="uploads/category/<?=$category['image']?>" width="100" alt="Current Image">
+                            <?php if(!empty($post['image'])): ?>
+                                <br><img src="uploads/post/<?=$post['image']?>" width="100" alt="Current Image">
                             <?php endif; ?>
-                            <input type="file" class="form-control" name="image" placeholder="Category Image">
+                            <input type="file" class="form-control" name="image" placeholder="post Image">
                         </div>
                         <input type="submit" value="Save" class="btn btn-primary" name="save">
                     </form>

@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
       $message = "Email and Password does not match";
     }
 }
-
+$conn->close();
 ?>
 <!doctype html>
 <html lang="en">
