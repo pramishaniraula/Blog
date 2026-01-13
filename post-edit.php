@@ -17,14 +17,14 @@
         $title  = $_POST['title'];
         $slug  = $_POST['slug'];
 
-        if(empty($name) || empty($slug)){
-            $message = "Please enter name and slug";
+        if(empty($title) || empty($slug)){
+            $message = "Please enter title and slug";
             $messageType = 'error';
         }else{
             $updateFields = "title='$title', slug='$slug'";
             if(isset($_FILES['image']) && $_FILES['image']['error'] != 4){
                 // New image uploaded
-                $imageName = time() . "_" . basename($_FILES['image']['title']);
+                $imageName = time() . "_" . basename($_FILES['image']['name']);
                 $target_dir = "uploads/post/";
                 $target_file = $target_dir . $imageName;
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
@@ -76,9 +76,9 @@
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name" 
-                            placeholder="post Name" value="<?=$post['name']?>">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" name="title" 
+                            placeholder="Post Title" value="<?=$post['title']?>">
                         </div>
                         <div class="mb-3">
                             <label for="slug">Slug</label>
@@ -91,7 +91,11 @@
                             <?php endif; ?>
                             <input type="file" class="form-control" name="image" placeholder="post Image">
                         </div>
-                        <input type="submit" value="Save" class="btn btn-primary" name="save">
+                        <div class="mb-3">
+                            <label for="content">Slug</label>
+                            <textarea class="form-control" placeholder="Post Content" name="content" id="" cols="30" rows="10"></textarea>
+                        </div>
+                        <input type="submit" value="Update" class="btn btn-primary" name="save">
                     </form>
                 </div>
             </div>

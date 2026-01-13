@@ -50,6 +50,26 @@
     <title>Create Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const titleInput = document.querySelector("input[name='title']");
+        const slugInput = document.querySelector("input[name='slug']");
+
+        titleInput.addEventListener("keyup", function() {
+            let slug = titleInput.value
+                .toLowerCase()                // lowercase
+                .trim()                       // remove spaces at ends
+                .replace(/[^a-z0-9\s-]/g, '') // remove special chars
+                .replace(/\s+/g, '-')         // spaces → dashes
+                .replace(/-+/g, '-');         // collapse multiple dashes
+
+            slugInput.value = slug;
+        });
+    });
+
+    </script>
+
 <body>
 
 <?php  include 'include/navbar.php'; ?>
@@ -76,7 +96,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="slug">Slug</label>
-                            <input type="text" class="form-control" name="slug" placeholder="Post Slug">
+                            <input type="text" class="form-control" name="slug" placeholder="Post Slug" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="image">Image</label>
