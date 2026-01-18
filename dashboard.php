@@ -29,15 +29,15 @@
                 </div>
                 <div class="d-flex gap-3">
                     <a href="category-create.php" class="btn btn-primary">Create Category</a>
-                    <a href="category-create.php" class="btn btn-primary">Manage Post</a>
-                    <a href="category-create.php" class="btn btn-primary">Create Category</a>
-                    <a href="category-create.php" class="btn btn-primary">Create Category</a>
+                    <a href="post-list.php" class="btn btn-success">Manage Posts</a>
+                    <a href="post-list.php" class="btn btn-warning">Manage Users</a>
+                    <a href="comment-list.php" class="btn btn-danger">Comments</a>
                 </div>
             
         </div>
     </div>
 </div>
-
+    <?php  include 'include/footer.php';   ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     
 </body>
