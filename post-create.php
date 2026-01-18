@@ -35,6 +35,7 @@
             if ($conn->query($sql) === TRUE) {
                 $message = "Post Created Successfully.";
                 $messageType = 'success';
+               
             }else {
                 echo "Error: ". $conn->error;
             }

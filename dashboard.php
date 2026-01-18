@@ -17,10 +17,24 @@
 <body>
 
 <?php  include 'include/navbar.php';   ?>
-
 <div class="container my-5">
     <div class="row">
         <?php  include 'include/sidebar.php';   ?>
+        <div class="col-lg-9">
+            <div class="d-flex">
+                <div class="alert alert-primary">
+                    <p>Hello! <?= $_SESSION['name'] ?> </p>
+                    <h5>Welcome to Dashboard</h5>
+                </div>
+                </div>
+                <div class="d-flex gap-3">
+                    <a href="category-create.php" class="btn btn-primary">Create Category</a>
+                    <a href="category-create.php" class="btn btn-primary">Manage Post</a>
+                    <a href="category-create.php" class="btn btn-primary">Create Category</a>
+                    <a href="category-create.php" class="btn btn-primary">Create Category</a>
+                </div>
+            
+        </div>
     </div>
 </div>
 
