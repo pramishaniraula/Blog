@@ -84,7 +84,8 @@ $conn->close();
                         <input name="password" type="password" class="form-control" placeholder="Enter your password">
 
                         <div class="d-flex">
-                            <input name="submit" class="btn btn-primary mt-3 w-50" type="submit" value="Login">                        </div>
+                            <input name="submit" class="btn btn-primary mt-3 w-50" type="submit" value="Login">                       
+                        </div>
                     </form>
                 </div>
             </div>
